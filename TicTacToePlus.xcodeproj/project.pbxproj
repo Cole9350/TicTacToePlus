@@ -13,6 +13,8 @@
 		AF7ED2922C457A79005969DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7ED2912C457A79005969DF /* Assets.xcassets */; };
 		AF7ED2952C457A79005969DF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AF7ED2942C457A79005969DF /* Base */; };
 		AF7ED2A02C457A79005969DF /* TicTacToePlusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED29F2C457A79005969DF /* TicTacToePlusTests.swift */; };
+		AF7ED2B92C45951A005969DF /* XView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2B82C45951A005969DF /* XView.swift */; };
+		AF7ED2BB2C4595A0005969DF /* OView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2BA2C4595A0005969DF /* OView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,8 @@
 		AF7ED2962C457A79005969DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF7ED29B2C457A79005969DF /* TicTacToePlusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToePlusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7ED29F2C457A79005969DF /* TicTacToePlusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToePlusTests.swift; sourceTree = "<group>"; };
+		AF7ED2B82C45951A005969DF /* XView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XView.swift; sourceTree = "<group>"; };
+		AF7ED2BA2C4595A0005969DF /* OView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				AF7ED2912C457A79005969DF /* Assets.xcassets */,
 				AF7ED2932C457A79005969DF /* LaunchScreen.storyboard */,
 				AF7ED2962C457A79005969DF /* Info.plist */,
+				AF7ED2BA2C4595A0005969DF /* OView.swift */,
+				AF7ED2B82C45951A005969DF /* XView.swift */,
 			);
 			path = TicTacToePlus;
 			sourceTree = "<group>";
@@ -195,7 +201,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7ED28D2C457A76005969DF /* ViewController.swift in Sources */,
+				AF7ED2B92C45951A005969DF /* XView.swift in Sources */,
 				AF7ED2892C457A76005969DF /* AppDelegate.swift in Sources */,
+				AF7ED2BB2C4595A0005969DF /* OView.swift in Sources */,
 				AF7ED28B2C457A76005969DF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,7 +361,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5FU28ZW8L7;
@@ -381,7 +388,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5FU28ZW8L7;
