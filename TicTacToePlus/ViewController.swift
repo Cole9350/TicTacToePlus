@@ -18,19 +18,18 @@ class ViewController: UIViewController {
     let currentPlayerXView = XView()
     let currentPlayerOView = OView()
     
+    var playerX = Player(symbol: .X)
+    var playerO = Player(symbol: .O)
+    var currentPlayer: Player?
+    
     // Const
-    let gridSize = 4
-
-    var currentPlayer: String = "X" {
-        didSet {
-            updateCurrentPlayerSymbol()
-        }
-    }
+    let gridSize = 5
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentPlayer = "X"
+        currentPlayer = playerX
         setupUI()
+        updateCurrentPlayerSymbol()
     }
     
     func setupUI() {
@@ -42,7 +41,7 @@ class ViewController: UIViewController {
     }
     
     func updateCurrentPlayerSymbol() {
-        if currentPlayer == "X" {
+        if currentPlayer?.symbol == .X {
             currentPlayerXView.isHidden = false
             currentPlayerOView.isHidden = true
         } else {
@@ -54,9 +53,15 @@ class ViewController: UIViewController {
     @objc func gridButtonTapped(_ sender: UIButton) {
         // Do nothing if clicked grid is already filled
         guard sender.subviews.filter({ $0 is XView || $0 is OView }).isEmpty else { return }
+        guard let currentPlayer = currentPlayer else { return }
+        // Convert tag back to row / col
+        let tag = sender.tag
+        let row = tag / gridSize
+        let col = tag % gridSize
+        currentPlayer.addMove(row: row, col: col)
         
         let symbolView: UIView
-        if currentPlayer == "X" {
+        if currentPlayer.symbol == .X {
             symbolView = XView()
         } else {
             symbolView = OView()
@@ -71,8 +76,13 @@ class ViewController: UIViewController {
             symbolView.heightAnchor.constraint(equalTo: sender.heightAnchor, multiplier: 0.6)
         ])
         
-        // Toggle player
-        currentPlayer = (currentPlayer == "X") ? "O" : "X"
+        if checkForWin(player: currentPlayer, gridSize: gridSize) {
+            showAlert(title: "Game Over", message: "\(currentPlayer.symbol.rawValue) Wins!")
+        } else {
+            // Toggle player
+            self.currentPlayer = (currentPlayer.symbol == .X) ? playerO : playerX
+            updateCurrentPlayerSymbol()
+        }
     }
     
     @objc func newGameButtonTapped() {
@@ -82,9 +92,11 @@ class ViewController: UIViewController {
                 button.subviews.forEach { $0.removeFromSuperview() }
             }
         }
-        
-        // Set starting player
-        currentPlayer = "X"
+        // Reset players
+        playerX.clearMoves()
+        playerO.clearMoves()
+        currentPlayer = playerX
+        updateCurrentPlayerSymbol()
     }
     
     func setupGridLayout() {
@@ -104,7 +116,7 @@ class ViewController: UIViewController {
         ])
         
         // Row
-        for _ in 0..<gridSize {
+        for row in 0..<gridSize {
             let rowStackView = UIStackView()
             rowStackView.axis = .horizontal
             rowStackView.distribution = .fillEqually
@@ -114,10 +126,12 @@ class ViewController: UIViewController {
             
             var rowButtons: [UIButton] = []
             // Column
-            for _ in 0..<gridSize {
+            for col in 0..<gridSize {
                 let button = UIButton(type: .system)
                 button.backgroundColor = .white
                 button.translatesAutoresizingMaskIntoConstraints = false
+                // Set unique int for each grid cell
+                button.tag = row * gridSize + col
                 button.addTarget(self, action: #selector(gridButtonTapped(_:)), for: .touchUpInside)
                 
                 // Add clickable grid section
@@ -184,4 +198,57 @@ class ViewController: UIViewController {
             newGameButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    
+    func checkForWin(player: Player, gridSize: Int) -> Bool {
+        let consecutiveSymbolsToWin = gridSize
+        
+        // Vertical + Horizontal
+        for i in 0..<gridSize {
+            for j in 0..<(gridSize - consecutiveSymbolsToWin + 1) {
+                if (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: i, col: j + $0)) }) ||
+                   (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: j + $0, col: i)) }) {
+                    return true
+                }
+            }
+        }
+        
+        // Diagonals
+        for i in 0..<(gridSize - consecutiveSymbolsToWin + 1) {
+            for j in 0..<(gridSize - consecutiveSymbolsToWin + 1) {
+                if (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: i + $0, col: j + $0)) }) ||
+                   (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: i + $0, col: j + consecutiveSymbolsToWin - 1 - $0)) }) {
+                    return true
+                }
+            }
+        }
+        
+        // 4 corners
+        if player.moves.contains(Move(row: 0, col: 0)) &&
+            player.moves.contains(Move(row: 0, col: gridSize - 1)) &&
+            player.moves.contains(Move(row: gridSize - 1, col: 0)) &&
+            player.moves.contains(Move(row: gridSize - 1, col: gridSize - 1)) {
+            return true
+        }
+        
+        // Center 4
+        for i in 0..<(gridSize - 1) {
+            for j in 0..<(gridSize - 1) {
+                if player.moves.contains(Move(row: i, col: j)) &&
+                    player.moves.contains(Move(row: i, col: j + 1)) &&
+                    player.moves.contains(Move(row: i + 1, col: j)) &&
+                    player.moves.contains(Move(row: i + 1, col: j + 1)) {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
 }
