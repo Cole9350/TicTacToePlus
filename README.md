@@ -33,7 +33,7 @@ Unit tests are included to ensure the correctness of the game logic. To run the 
 - **New Game Button**: Resets the game to start a new match.
 - **Win Indicator**: Highlights the winning cells and displays a popup with the winner.
 - **Support for Multiple Win Conditions**: Rows, columns, diagonals, 2x2 boxes, and four corners.
-- 
+  
 ## Usage
 
 - **Starting a New Game**: Press the "New Game" button to reset the board.
