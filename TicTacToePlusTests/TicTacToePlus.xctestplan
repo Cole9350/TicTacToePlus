@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "E0DF45B5-F46C-481D-8601-06D01CD2EBA6",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:TicTacToePlus.xcodeproj",
+      "identifier" : "AF7ED2842C457A76005969DF",
+      "name" : "TicTacToePlus"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:TicTacToePlus.xcodeproj",
+        "identifier" : "AF7ED29A2C457A79005969DF",
+        "name" : "TicTacToePlusTests"
+      }
+    }
+  ],
+  "version" : 1
+}

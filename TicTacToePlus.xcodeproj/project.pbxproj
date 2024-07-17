@@ -16,6 +16,7 @@
 		AF7ED2B92C45951A005969DF /* XView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2B82C45951A005969DF /* XView.swift */; };
 		AF7ED2BB2C4595A0005969DF /* OView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2BA2C4595A0005969DF /* OView.swift */; };
 		AF7ED2BF2C45BC20005969DF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2BE2C45BC20005969DF /* Player.swift */; };
+		AF7ED2C12C46CFEA005969DF /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 		AF7ED2B82C45951A005969DF /* XView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XView.swift; sourceTree = "<group>"; };
 		AF7ED2BA2C4595A0005969DF /* OView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OView.swift; sourceTree = "<group>"; };
 		AF7ED2BE2C45BC20005969DF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
+		AF7ED2C22C46E7E4005969DF /* TicTacToePlus.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TicTacToePlus.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 				AF7ED2882C457A76005969DF /* AppDelegate.swift */,
 				AF7ED28A2C457A76005969DF /* SceneDelegate.swift */,
 				AF7ED28C2C457A76005969DF /* ViewController.swift */,
+				AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */,
 				AF7ED2912C457A79005969DF /* Assets.xcassets */,
 				AF7ED2932C457A79005969DF /* LaunchScreen.storyboard */,
 				AF7ED2962C457A79005969DF /* Info.plist */,
@@ -98,6 +102,7 @@
 		AF7ED29E2C457A79005969DF /* TicTacToePlusTests */ = {
 			isa = PBXGroup;
 			children = (
+				AF7ED2C22C46E7E4005969DF /* TicTacToePlus.xctestplan */,
 				AF7ED29F2C457A79005969DF /* TicTacToePlusTests.swift */,
 			);
 			path = TicTacToePlusTests;
@@ -206,6 +211,7 @@
 				AF7ED28D2C457A76005969DF /* ViewController.swift in Sources */,
 				AF7ED2B92C45951A005969DF /* XView.swift in Sources */,
 				AF7ED2892C457A76005969DF /* AppDelegate.swift in Sources */,
+				AF7ED2C12C46CFEA005969DF /* TicTacToeViewModel.swift in Sources */,
 				AF7ED2BB2C4595A0005969DF /* OView.swift in Sources */,
 				AF7ED2BF2C45BC20005969DF /* Player.swift in Sources */,
 				AF7ED28B2C457A76005969DF /* SceneDelegate.swift in Sources */,

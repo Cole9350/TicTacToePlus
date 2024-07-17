@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // MARK: - Properties
+    
     let gridContainer = UIStackView()
     var gridButtons: [[UIButton]] = []
     let newGameButton = UIButton(type: .system)
@@ -18,18 +20,41 @@ class ViewController: UIViewController {
     let currentPlayerXView = XView()
     let currentPlayerOView = OView()
     
-    var playerX = Player(symbol: .X)
-    var playerO = Player(symbol: .O)
-    var currentPlayer: Player?
+    var viewModel: TicTacToeViewModel
     
     // Const
-    let gridSize = 5
+    private let gridSize = 5
+    
+    // MARK: - Initializer
+    
+    init() {
+        self.viewModel = TicTacToeViewModel(gridSize: gridSize)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentPlayer = playerX
         setupUI()
-        updateCurrentPlayerSymbol()
+        setupBindings()
+        viewModel.resetGame()
+
+    }
+    
+    func setupBindings() {
+        viewModel.onWin = { [weak self] symbol, winningMoves in
+            self?.highlightWinningCells(winningMoves)
+            self?.showAlert(title: "Game Over", message: "\(symbol.rawValue) Wins!")
+        }
+        
+        viewModel.onUpdate = { [weak self] in
+            self?.updateUI()
+        }
     }
     
     func setupUI() {
@@ -37,11 +62,18 @@ class ViewController: UIViewController {
         setupGridLayout()
         setupCurrentPlayerLabel()
         setupNewGameButton()
+    }
+    
+    // MARK: - UI Update Methods
+    
+    func updateUI() {
         updateCurrentPlayerSymbol()
+        updateGrid()
     }
     
     func updateCurrentPlayerSymbol() {
-        if currentPlayer?.symbol == .X {
+        let currentPlayer = viewModel.currentPlayer
+        if currentPlayer.symbol == .X {
             currentPlayerXView.isHidden = false
             currentPlayerOView.isHidden = true
         } else {
@@ -50,53 +82,55 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateGrid() {
+        for (rowIndex, row) in gridButtons.enumerated() {
+            for (colIndex, button) in row.enumerated() {
+                button.subviews.forEach { $0.removeFromSuperview() }
+                let move = Move(row: rowIndex, col: colIndex)
+                if viewModel.playerX.moves.contains(move) {
+                    addSymbolView(.X, to: button)
+                } else if viewModel.playerO.moves.contains(move) {
+                    addSymbolView(.O, to: button)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Action Methods
+    
     @objc func gridButtonTapped(_ sender: UIButton) {
-        // Do nothing if clicked grid is already filled
-        guard sender.subviews.filter({ $0 is XView || $0 is OView }).isEmpty else { return }
-        guard let currentPlayer = currentPlayer else { return }
+        guard !gridButtons.isEmpty else { return }
         // Convert tag back to row / col
         let tag = sender.tag
         let row = tag / gridSize
         let col = tag % gridSize
-        currentPlayer.addMove(row: row, col: col)
-        
+        viewModel.makeMove(row: row, col: col)
+    }
+    
+    @objc func newGameButtonTapped() {
+        // Clear Grid & Reset players
+        clearWinningCells()
+        viewModel.resetGame()
+    }
+    
+    // MARK: - Helper Methods
+    
+    func addSymbolView(_ symbol: PlayerSymbol, to button: UIButton) {
         let symbolView: UIView
-        if currentPlayer.symbol == .X {
+        if symbol == .X {
             symbolView = XView()
         } else {
             symbolView = OView()
         }
         symbolView.translatesAutoresizingMaskIntoConstraints = false
-        sender.addSubview(symbolView)
+        button.addSubview(symbolView)
         
         NSLayoutConstraint.activate([
-            symbolView.centerXAnchor.constraint(equalTo: sender.centerXAnchor),
-            symbolView.centerYAnchor.constraint(equalTo: sender.centerYAnchor),
-            symbolView.widthAnchor.constraint(equalTo: sender.widthAnchor, multiplier: 0.6),
-            symbolView.heightAnchor.constraint(equalTo: sender.heightAnchor, multiplier: 0.6)
+            symbolView.centerXAnchor.constraint(equalTo: button.centerXAnchor),
+            symbolView.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            symbolView.widthAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.6),
+            symbolView.heightAnchor.constraint(equalTo: button.heightAnchor, multiplier: 0.6)
         ])
-        
-        if checkForWin(player: currentPlayer, gridSize: gridSize) {
-            showAlert(title: "Game Over", message: "\(currentPlayer.symbol.rawValue) Wins!")
-        } else {
-            // Toggle player
-            self.currentPlayer = (currentPlayer.symbol == .X) ? playerO : playerX
-            updateCurrentPlayerSymbol()
-        }
-    }
-    
-    @objc func newGameButtonTapped() {
-        // Clear Grid
-        for row in gridButtons {
-            for button in row {
-                button.subviews.forEach { $0.removeFromSuperview() }
-            }
-        }
-        // Reset players
-        playerX.clearMoves()
-        playerO.clearMoves()
-        currentPlayer = playerX
-        updateCurrentPlayerSymbol()
     }
     
     func setupGridLayout() {
@@ -199,50 +233,19 @@ class ViewController: UIViewController {
         ])
     }
     
-    func checkForWin(player: Player, gridSize: Int) -> Bool {
-        let consecutiveSymbolsToWin = gridSize
-        
-        // Vertical + Horizontal
-        for i in 0..<gridSize {
-            for j in 0..<(gridSize - consecutiveSymbolsToWin + 1) {
-                if (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: i, col: j + $0)) }) ||
-                   (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: j + $0, col: i)) }) {
-                    return true
-                }
+    func highlightWinningCells(_ winningMoves: [Move]) {
+        for move in winningMoves {
+            let button = gridButtons[move.row][move.col]
+            button.backgroundColor = .systemGreen
+        }
+    }
+    
+    func clearWinningCells() {
+        for row in gridButtons {
+            for button in row {
+                button.backgroundColor = .white
             }
         }
-        
-        // Diagonals
-        for i in 0..<(gridSize - consecutiveSymbolsToWin + 1) {
-            for j in 0..<(gridSize - consecutiveSymbolsToWin + 1) {
-                if (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: i + $0, col: j + $0)) }) ||
-                   (0..<consecutiveSymbolsToWin).allSatisfy({ player.moves.contains(Move(row: i + $0, col: j + consecutiveSymbolsToWin - 1 - $0)) }) {
-                    return true
-                }
-            }
-        }
-        
-        // 4 corners
-        if player.moves.contains(Move(row: 0, col: 0)) &&
-            player.moves.contains(Move(row: 0, col: gridSize - 1)) &&
-            player.moves.contains(Move(row: gridSize - 1, col: 0)) &&
-            player.moves.contains(Move(row: gridSize - 1, col: gridSize - 1)) {
-            return true
-        }
-        
-        // Center 4
-        for i in 0..<(gridSize - 1) {
-            for j in 0..<(gridSize - 1) {
-                if player.moves.contains(Move(row: i, col: j)) &&
-                    player.moves.contains(Move(row: i, col: j + 1)) &&
-                    player.moves.contains(Move(row: i + 1, col: j)) &&
-                    player.moves.contains(Move(row: i + 1, col: j + 1)) {
-                    return true
-                }
-            }
-        }
-        
-        return false
     }
     
     func showAlert(title: String, message: String) {
