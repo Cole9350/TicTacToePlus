@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct Move: Hashable {
-    let row: Int
-    let col: Int
-}
-
 class Player {
     var symbol: PlayerSymbol
     var moves: Set<Move>
@@ -28,9 +23,4 @@ class Player {
     func clearMoves() {
         moves.removeAll()
     }
-}
-
-enum PlayerSymbol: String {
-    case X = "X"
-    case O = "O"
 }

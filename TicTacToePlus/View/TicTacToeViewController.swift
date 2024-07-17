@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TicTacToeViewController.swift
 //  TicTacToePlus
 //
 //  Created by Shawn Cole on 7/15/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TicTacToeViewController: UIViewController {
     // MARK: - Properties
     
     let gridContainer = UIStackView()
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     var viewModel: TicTacToeViewModel
     
     // Const
-    private let gridSize = 5
+    private let gridSize = 4
     
     // MARK: - Initializer
     

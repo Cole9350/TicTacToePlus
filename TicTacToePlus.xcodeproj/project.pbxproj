@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF7ED2892C457A76005969DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2882C457A76005969DF /* AppDelegate.swift */; };
 		AF7ED28B2C457A76005969DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED28A2C457A76005969DF /* SceneDelegate.swift */; };
-		AF7ED28D2C457A76005969DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED28C2C457A76005969DF /* ViewController.swift */; };
+		AF7ED28D2C457A76005969DF /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED28C2C457A76005969DF /* TicTacToeViewController.swift */; };
 		AF7ED2922C457A79005969DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7ED2912C457A79005969DF /* Assets.xcassets */; };
 		AF7ED2952C457A79005969DF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AF7ED2942C457A79005969DF /* Base */; };
 		AF7ED2A02C457A79005969DF /* TicTacToePlusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED29F2C457A79005969DF /* TicTacToePlusTests.swift */; };
@@ -17,6 +17,8 @@
 		AF7ED2BB2C4595A0005969DF /* OView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2BA2C4595A0005969DF /* OView.swift */; };
 		AF7ED2BF2C45BC20005969DF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2BE2C45BC20005969DF /* Player.swift */; };
 		AF7ED2C12C46CFEA005969DF /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */; };
+		AF9BD2982C4835DD00EE185D /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9BD2972C4835DD00EE185D /* Move.swift */; };
+		AF9BD29A2C4835F100EE185D /* PlayerSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9BD2992C4835F100EE185D /* PlayerSymbol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +35,7 @@
 		AF7ED2852C457A76005969DF /* TicTacToePlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToePlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7ED2882C457A76005969DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7ED28A2C457A76005969DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AF7ED28C2C457A76005969DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AF7ED28C2C457A76005969DF /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		AF7ED2912C457A79005969DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7ED2942C457A79005969DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF7ED2962C457A79005969DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		AF7ED2BE2C45BC20005969DF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		AF7ED2C22C46E7E4005969DF /* TicTacToePlus.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TicTacToePlus.xctestplan; sourceTree = "<group>"; };
+		AF9BD2972C4835DD00EE185D /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		AF9BD2992C4835F100EE185D /* PlayerSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSymbol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,16 +89,14 @@
 		AF7ED2872C457A76005969DF /* TicTacToePlus */ = {
 			isa = PBXGroup;
 			children = (
+				AF9BD2932C4834FB00EE185D /* Model */,
+				AF9BD2942C48350300EE185D /* View */,
+				AF9BD2952C48350B00EE185D /* ViewModel */,
+				AF9BD2962C48353800EE185D /* Resources */,
 				AF7ED2882C457A76005969DF /* AppDelegate.swift */,
 				AF7ED28A2C457A76005969DF /* SceneDelegate.swift */,
-				AF7ED28C2C457A76005969DF /* ViewController.swift */,
-				AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */,
-				AF7ED2912C457A79005969DF /* Assets.xcassets */,
 				AF7ED2932C457A79005969DF /* LaunchScreen.storyboard */,
 				AF7ED2962C457A79005969DF /* Info.plist */,
-				AF7ED2BA2C4595A0005969DF /* OView.swift */,
-				AF7ED2B82C45951A005969DF /* XView.swift */,
-				AF7ED2BE2C45BC20005969DF /* Player.swift */,
 			);
 			path = TicTacToePlus;
 			sourceTree = "<group>";
@@ -106,6 +108,42 @@
 				AF7ED29F2C457A79005969DF /* TicTacToePlusTests.swift */,
 			);
 			path = TicTacToePlusTests;
+			sourceTree = "<group>";
+		};
+		AF9BD2932C4834FB00EE185D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AF9BD2972C4835DD00EE185D /* Move.swift */,
+				AF7ED2BE2C45BC20005969DF /* Player.swift */,
+				AF9BD2992C4835F100EE185D /* PlayerSymbol.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AF9BD2942C48350300EE185D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF7ED28C2C457A76005969DF /* TicTacToeViewController.swift */,
+				AF7ED2B82C45951A005969DF /* XView.swift */,
+				AF7ED2BA2C4595A0005969DF /* OView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF9BD2952C48350B00EE185D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF7ED2C02C46CFEA005969DF /* TicTacToeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AF9BD2962C48353800EE185D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF7ED2912C457A79005969DF /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,10 +246,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF7ED28D2C457A76005969DF /* ViewController.swift in Sources */,
+				AF7ED28D2C457A76005969DF /* TicTacToeViewController.swift in Sources */,
 				AF7ED2B92C45951A005969DF /* XView.swift in Sources */,
+				AF9BD29A2C4835F100EE185D /* PlayerSymbol.swift in Sources */,
 				AF7ED2892C457A76005969DF /* AppDelegate.swift in Sources */,
 				AF7ED2C12C46CFEA005969DF /* TicTacToeViewModel.swift in Sources */,
+				AF9BD2982C4835DD00EE185D /* Move.swift in Sources */,
 				AF7ED2BB2C4595A0005969DF /* OView.swift in Sources */,
 				AF7ED2BF2C45BC20005969DF /* Player.swift in Sources */,
 				AF7ED28B2C457A76005969DF /* SceneDelegate.swift in Sources */,
