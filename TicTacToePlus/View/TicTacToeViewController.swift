@@ -175,32 +175,40 @@ class TicTacToeViewController: UIViewController {
             gridButtons.append(rowButtons)
         }
     }
-    
     func setupCurrentPlayerLabel() {
+        let currentPlayerContainer = UIView()
+        currentPlayerContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(currentPlayerContainer)
+
         currentPlayerLabel.text = "Current Player:"
         currentPlayerLabel.font = .systemFont(ofSize: 22, weight: .medium)
         currentPlayerLabel.textColor = UIColor(.customGray)
         currentPlayerLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(currentPlayerLabel)
+        currentPlayerContainer.addSubview(currentPlayerLabel)
         
         // Container to hold X or O view
         currentPlayerSymbolContainer.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(currentPlayerSymbolContainer)
+        currentPlayerContainer.addSubview(currentPlayerSymbolContainer)
         
         currentPlayerXView.translatesAutoresizingMaskIntoConstraints = false
         currentPlayerXView.isHidden = true
         currentPlayerSymbolContainer.addSubview(currentPlayerXView)
+        
         currentPlayerOView.translatesAutoresizingMaskIntoConstraints = false
         currentPlayerOView.isHidden = true
         currentPlayerSymbolContainer.addSubview(currentPlayerOView)
         
         // Constraints for the current player label and symbol
         NSLayoutConstraint.activate([
-            currentPlayerLabel.topAnchor.constraint(equalTo: gridContainer.topAnchor, constant: -80),
-            currentPlayerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -50),
+            currentPlayerContainer.topAnchor.constraint(equalTo: gridContainer.topAnchor, constant: -50),
+            currentPlayerContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            currentPlayerSymbolContainer.centerYAnchor.constraint(equalTo: currentPlayerLabel.centerYAnchor),
+            currentPlayerLabel.leadingAnchor.constraint(equalTo: currentPlayerContainer.leadingAnchor),
+            currentPlayerLabel.centerYAnchor.constraint(equalTo: currentPlayerContainer.centerYAnchor),
+            
             currentPlayerSymbolContainer.leadingAnchor.constraint(equalTo: currentPlayerLabel.trailingAnchor, constant: 10),
+            currentPlayerSymbolContainer.trailingAnchor.constraint(equalTo: currentPlayerContainer.trailingAnchor),
+            currentPlayerSymbolContainer.centerYAnchor.constraint(equalTo: currentPlayerLabel.centerYAnchor),
             currentPlayerSymbolContainer.widthAnchor.constraint(equalToConstant: 50),
             currentPlayerSymbolContainer.heightAnchor.constraint(equalToConstant: 50),
             

@@ -11,6 +11,7 @@ class TicTacToeViewModel {
     var playerX = Player(symbol: .X)
     var playerO = Player(symbol: .O)
     var currentPlayer: Player
+    var isGameActive: Bool
     
     let gridSize: Int
     
@@ -20,23 +21,27 @@ class TicTacToeViewModel {
     init(gridSize: Int) {
         self.gridSize = gridSize
         self.currentPlayer = playerX
+        self.isGameActive = true
     }
     
     func resetGame() {
         playerX.clearMoves()
         playerO.clearMoves()
         currentPlayer = playerX
+        isGameActive = true
         onUpdate?()
     }
     
     func makeMove(row: Int, col: Int) {
-        // Do nothing if clicked grid is already filled
+        // Do nothing if clicked grid is already filled or winner already found
         guard !isMoveTaken(row: row, col: col) else { return }
+        guard isGameActive else { return }
                 
         currentPlayer.addMove(row: row, col: col)
         onUpdate?()
         
         if let winningMoves = checkForWin(player: currentPlayer) {
+            isGameActive = false
             onWin?(currentPlayer.symbol, winningMoves)
         } else {
             togglePlayer()
